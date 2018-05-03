@@ -1,0 +1,93 @@
+@import "colors";
+
+body {
+  a {
+    color: $mainBlue;
+  }
+  font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”, “Helvetica Neue”, Helvetica, Arial, sans-serif;
+  color: $mainBlack;
+}
+
+.account {
+  p {
+    text-align: center;
+  }
+}
+
+.container {
+  line-height: 1.35;
+  margin: 0 auto;  
+  max-width: 50em;
+  padding: 2em;
+  button {
+    background: none;
+    border-radius: 0;
+    border: none;
+    padding: .5em;    
+  }
+  form {
+    input {
+      border: 1px solid $mainGray;
+      display: block;
+      margin-bottom: 1em;
+      padding: .5em;
+    }
+  }
+}
+
+.errors {
+  color: $mainRed;
+  list-style-type: none;
+  margin-top: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  &-row {
+    @extend .flex;
+    flex-direction: row;
+  }
+  &-column {
+    @extend .flex;    
+    flex-direction: column;
+  }
+}
+
+.footer {
+  border-top: 1px solid $mainBlack;
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 2em;
+  text-align: center;
+  opacity: .75;
+}
+
+.header {
+  justify-content: space-between;
+  padding: 1em;
+  a, span {
+    margin-right: .5em;
+  }
+}
+
+.signup, .signin {
+  .cta {
+    text-align: center;
+  }
+  form {
+    background-color: $mainLightGray;
+    max-width: 20em;
+    margin: 0 auto;
+    padding: 1.5em;
+    align-items: center;
+    button {
+      background-color: $mainBlue;
+      color: white;
+    }    
+    input {
+      width: 100%;
+    }
+  }
+}

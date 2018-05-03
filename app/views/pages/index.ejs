@@ -1,0 +1,13 @@
+<% extend("../layout") %>
+
+<% if (user) { %>
+  <p>fromCache: <%= fromCache %></p>
+  <ul>
+    <% repos.forEach(repo => { %>
+      <li><%= repo.name %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p style="text-align: center">Please <a href="/signin">sign in</a>.</p>
+<% } %>
+
