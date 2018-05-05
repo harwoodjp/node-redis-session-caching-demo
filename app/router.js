@@ -1,10 +1,13 @@
 const passport = require("passport")
 
 const web_controller = require("../app/controllers/WebController"),
+  cache_controller = require("../app/controllers/CacheController")
   api_controller = require("../app/controllers/ApiController")
+  
+const RepoCacheService = require("../app/services/cache/RepoCacheService")
 
 module.exports = app => {
-  app.get("/", web_controller.index)
+  app.get("/", cache_controller.index, web_controller.index)
   
   app.get("/signout", web_controller.signout)
 

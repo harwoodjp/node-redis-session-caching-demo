@@ -3,8 +3,12 @@ const redis = require("redis"),
   { promisify } = require("util"),
   getAsync = promisify(client.get).bind(client),
   existsAync = promisify(client.exists).bind(client),
-  setAync = promisify(client.set).bind(client)
+  setAsync = promisify(client.set).bind(client),
+  setexAsync = promisify(client.setex).bind(client)
+
 
 exports.existsRepos = async req => await existsAync(`sess:${req.sessionID}:repos`)
 exports.getRepos = async req => await getAsync(`sess:${req.sessionID}:repos`)
-exports.setRepos = async (req, repos) => await setAsync(`sess:${req.sessionID}:repos`, JSON.stringify(repos))
+exports.setRepos = async (req, repos) => {
+  return await setexAsync(`sess:${req.sessionID}:repos`, 5 , JSON.stringify(repos))
+}

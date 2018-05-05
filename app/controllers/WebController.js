@@ -4,41 +4,22 @@ const RepoCacheService = require("../services/cache/RepoCacheService")
 
 exports.index = (req, res) => {
   const user = req.user ? req.user : null
-
-  RepoCacheService.existsRepos(req)
-    .then(bool => {
-      const reposInCache = !!bool
-      if (reposInCache) {
-        RepoCacheService.getRepos(req)
-          .then(repos => {
-            res.render("pages/index", {
-              title: "Home",
-              user,
-              repos: JSON.parse(repos),
-              fromCache: true
-            })
-          })
-      } else {
-        const f = fetch("https://api.github.com/users/harwoodjp/repos").then(res => res.json())
-        f.then(resp => {
-          const repos = resp.map(repo => {
-            return {
-              name: repo.name,
-              description: repo.description
-            }
-          })
-          res.render("pages/index", {
-            title: "Home",
-            user,
-            repos,
-            fromCache: false
-          })        
-          RepoCacheService.setRepos(req, repos)
-        })
+  const f = fetch("https://api.github.com/users/harwoodjp/repos").then(res => res.json())
+  f.then(resp => {
+    const repos = resp.map(repo => {
+      return {
+        name: repo.name,
+        description: repo.description
       }
     })
-
-  
+    res.render("pages/index", {
+      title: "Home",
+      user,
+      repos,
+      fromCache: false
+    })        
+    RepoCacheService.setRepos(req, repos)
+  })
 }
 
 exports.signout = (req, res) => {
